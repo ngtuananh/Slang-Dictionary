@@ -74,6 +74,11 @@ public class SlangWords {
 		this.slangWordList.remove(slang);
 	}
 	
+	public String randomSlangWord() {
+		Random rd = new Random();
+		ArrayList<String> slangs = new ArrayList<String>(this.slangWordList.keySet());
+		return slangs.get(rd.nextInt(slangs.size()));		
+	}
 	
 	
 }
