@@ -55,11 +55,11 @@ public class Menu {
                         break;
                     case 5:
                         clearScreen();
-                        
+                        editSlangWord(slangWord);
                         break;
                     case 6:
                         clearScreen();
-                        
+                        removeSlangWord(slangWord);
                         break;
                     case 7:
                         clearScreen();
@@ -185,6 +185,63 @@ public class Menu {
         	sc.close();
         }
     }
+	
+	private void editSlangWord(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Edit slang word");
+        Scanner sc = null;
+        try {
+        	sc = new Scanner(System.in);
+        	System.out.print("Enter a word: ");
+            String word = sc.nextLine();
+            System.out.print("Enter a new definition: ");
+            String definition = sc.nextLine();
+        	System.out.print("Enter a new definition: ");
+            String newDefinition = sc.nextLine();
+            if(slangWord.editSlangWord(word, definition, newDefinition)) {
+            	System.out.println("Edit slang word successfully!");
+            }
+            else {
+            	System.out.println("Edit slang word unsuccessfully!");
+            }
+            
+            System.out.println("Press Enter to continue...");
+            sc.nextLine();
+            run(slangWord);
+        }
+        finally {
+        	sc.close();
+        }
+    }
+	
+	private void removeSlangWord(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Remove slang word");
+        Scanner sc = null;
+        try {
+        	sc = new Scanner(System.in);
+        	System.out.print("Enter a word: ");
+            String word = sc.nextLine();
+            System.out.println("Are you sure you want to delete this word? (Y/N)");
+            System.out.print("Enter your choice: ");
+            String choice = sc.nextLine();
+            if(choice.equalsIgnoreCase("Y")){
+                slangWord.removeSlangWord(word);
+                System.out.println("Delete successfully!");
+            }
+            else{
+                System.out.println("Delete unsuccessfully!");
+            }
+            
+            System.out.println("Press Enter to continue...");
+            sc.nextLine();
+            run(slangWord);
+        }
+        finally {
+        	sc.close();
+        }
+    }
+	
 	
 	// tham khảo stackoverflow
 	private boolean isNumeric(String choice) {
