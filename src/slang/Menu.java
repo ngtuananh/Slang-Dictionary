@@ -92,28 +92,62 @@ public class Menu {
         } while (id<0||id>10);
     }
 	
-	
-	
-	private void viewHistory(SlangWords slangWord) {
-        
-        if(slangWord.getHistorySlang().size()==0){
-            System.out.println("No search history!");
-        }
-        else{
-            clearScreen();
-            System.out.println("Search history:");
-            int i =1;
-            for(String word : slangWord.getHistorySlang()) {
-                System.out.println(i +". "+ word);
-                i++;
+	private void searchBySlang(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Search by slang word");
+        Scanner sc = null;
+        try {
+        	sc = new Scanner(System.in);
+        	System.out.print("Enter a slang word: ");
+            String word = sc.nextLine();
+            ArrayList<String> definition = slangWord.searchBySlang(word);
+            if(definition.size() > 0) {
+            	System.out.println("Definition: ");
+                for (String s : definition) {
+                	System.out.println("- " + s);
+                }
             }
+            else {
+                System.out.println("Not found!");
+            }
+            System.out.println("Press Enter to continue...");
+            sc.nextLine();
+            run(slangWord);
         }
-        System.out.println("Press enter to continue...");
-        try (Scanner sc = new Scanner(System.in)) {
-			sc.nextLine();
-		}
-        run(slangWord);
+        finally {
+        	sc.close();
+        }
     }
+	
+	private void searchByDefinition(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Search by definition");
+        Scanner sc = null;
+        try {
+        	sc = new Scanner(System.in);
+        	System.out.print("Enter a definition: ");
+            String word = sc.nextLine();
+            ArrayList<String> slang = slangWord.searchByDefinition(word);
+            System.out.println("Found " + slang.size() + " results");
+            if (slang.size() > 0) {
+	            for (String s : slang) {
+					System.out.println("- " + s);
+					
+				}
+            }
+            else {
+            	System.out.println("Not found!");
+            }
+            System.out.println("Press Enter to continue...");
+            sc.nextLine();
+            run(slangWord);
+        }
+        finally {
+        	sc.close();
+        }
+    }
+	
+	
 	
 	
 	private boolean isNumeric(String choice) {
