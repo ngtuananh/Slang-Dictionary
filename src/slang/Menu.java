@@ -51,7 +51,7 @@ public class Menu {
                         break;
                     case 4:
                         clearScreen();
-                        
+                        addSlangWord(slangWord);
                         break;
                     case 5:
                         clearScreen();
@@ -165,14 +165,35 @@ public class Menu {
         run(slangWord);
     }
 	
+	private void addSlangWord(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Add new slang word");
+        Scanner sc = null;
+        try {
+        	sc = new Scanner(System.in);
+        	System.out.print("Enter a word: ");
+            String word = sc.nextLine();
+        	System.out.print("Enter a definition: ");
+            String definition = sc.nextLine();
+            slangWord.addSlangWord(word, definition);
+            System.out.println("Add new word successfully!");
+            System.out.println("Press Enter to continue...");
+            sc.nextLine();
+            run(slangWord);
+        }
+        finally {
+        	sc.close();
+        }
+    }
 	
+	// tham khảo stackoverflow
 	private boolean isNumeric(String choice) {
         if(choice.matches("[0-9]+")) {
             return true;
         }
         return false;
     }
-	
+	// tham khảo stackoverflow
 	public static void clearScreen() {  
 	        try {
 	        if (System.getProperty("os.name").contains("Windows"))
