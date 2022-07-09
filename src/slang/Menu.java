@@ -39,15 +39,15 @@ public class Menu {
                 switch (id) {
                     case 1:
                         clearScreen();
-                        searchSlangWord(slangWord);
+                        searchBySlang(slangWord);
                         break;
                     case 2:
                         clearScreen();
-                        
+                        searchByDefinition(slangWord);
                         break;
                     case 3:
                         clearScreen();
-                        
+                        viewHistory(slangWord);
                         break;
                     case 4:
                         clearScreen();
@@ -92,33 +92,28 @@ public class Menu {
         } while (id<0||id>10);
     }
 	
-	private void searchSlangWord(SlangWords slangWord) {
-        clearScreen();
-        System.out.println("Search by slang word");
-        Scanner sc = null;
-        try {
-        	sc = new Scanner(System.in);
-        	System.out.print("Enter a slang word: ");
-            String word = sc.nextLine();
-            ArrayList<String> definition = slangWord.searchBySlang(word);
-            if(definition != null) {
-            	System.out.println("Definition: ");
-                for (String s : definition) {
-                	System.out.println("- " + s);
-                }
-            }
-            else {
-                System.out.println("Not found!");
-            }
-            System.out.println("Press Enter to continue...");
-            sc.nextLine();
-            run(slangWord);
-        }
-        finally {
-        	sc.close();
-        }
-    }
 	
+	
+	private void viewHistory(SlangWords slangWord) {
+        
+        if(slangWord.getHistorySlang().size()==0){
+            System.out.println("No search history!");
+        }
+        else{
+            clearScreen();
+            System.out.println("Search history:");
+            int i =1;
+            for(String word : slangWord.getHistorySlang()) {
+                System.out.println(i +". "+ word);
+                i++;
+            }
+        }
+        System.out.println("Press enter to continue...");
+        try (Scanner sc = new Scanner(System.in)) {
+			sc.nextLine();
+		}
+        run(slangWord);
+    }
 	
 	
 	private boolean isNumeric(String choice) {
