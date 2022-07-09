@@ -63,11 +63,11 @@ public class Menu {
                         break;
                     case 7:
                         clearScreen();
-                        
+                        resetSlangWord(slangWord);
                         break;
                     case 8:
                         clearScreen();
-                        
+                        randomSlangWord(slangWord);
                         break;
                     case 9:
                         clearScreen();
@@ -242,6 +242,30 @@ public class Menu {
         }
     }
 	
+	private void resetSlangWord(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("Reset slang word");
+        slangWord.resetSlangWord();
+        SlangWordsIO.read(slangWord.getSlangWordList(), "src/slang.txt");
+        System.out.println("Delete successfully!");
+        System.out.println("Press Enter to continue...");
+        run(slangWord);    
+    }
+	
+	private void randomSlangWord(SlangWords slangWord) {
+        clearScreen();
+        System.out.println("On this day slang word");
+        String slang = slangWord.randomSlangWord();
+        ArrayList<String> definition = slangWord.searchBySlang(slang);
+        System.out.println("Slang: " + slang);
+        System.out.println("Definition: ");
+        for (String s : definition) {
+        	System.out.println("- " + s);
+        }      
+        System.out.println("Press Enter to continue...");
+        run(slangWord);
+        
+    }
 	
 	// tham khảo stackoverflow
 	private boolean isNumeric(String choice) {
