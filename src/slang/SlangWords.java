@@ -17,6 +17,19 @@ public class SlangWords {
 		historySlang = new LinkedList<String>();
 	}
 	
+	public SlangWords(HashMap<String, ArrayList<String>> slangWordList) {
+		this.slangWordList = slangWordList;
+		historySlang = new LinkedList<String>();
+	}
+	
+	public HashMap<String, ArrayList<String>> getSlangWordList(){
+		return this.slangWordList;
+	}
+	
+	public void setSlangWordList(String slang, ArrayList<String> definitions) {
+		this.slangWordList.put(slang, definitions);
+	}
+	
 	public void setHistorySlang(String slang) {
 		this.historySlang.add(slang);
 	}
