@@ -147,7 +147,23 @@ public class Menu {
         }
     }
 	
-	
+	private void viewHistory(SlangWords slangWord) {
+        
+        if(slangWord.getHistorySlang().size()==0){
+            System.out.println("No search history!");
+        }
+        else{
+            clearScreen();
+            System.out.println("Search history:");
+            int i =1;
+            for(String word : slangWord.getHistorySlang()) {
+                System.out.println(i +". "+ word);
+                i++;
+            }
+        }
+        System.out.println("Press enter to continue...");
+        run(slangWord);
+    }
 	
 	
 	private boolean isNumeric(String choice) {
